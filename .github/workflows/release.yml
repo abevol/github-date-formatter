@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update version in userscript
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          sed -i "s/\/\/ @version\s\+.*$/\/\/ @version      $VERSION/" github-date-formatter.user.js
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: github-date-formatter.user.js
+          generate_release_notes: true
