@@ -2,7 +2,7 @@
 // @name         GitHub Date Formatter
 // @name:zh-CN   GitHub 日期时间格式优化
 // @namespace    https://github.com/abevol/github-date-formatter
-// @version      1.0
+// @version      0.0.0
 // @description  A userscript to convert GitHub's relative timestamps and commit dates into standard local datetime formats.
 // @description:zh-CN 将 GitHub 网页中的相对时间与英文日期统一转换为直观易读的本地标准日期格式。
 // @author       Abevol
