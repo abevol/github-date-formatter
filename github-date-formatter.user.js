@@ -34,13 +34,23 @@
 
     // 格式化函数：仅输出标题所需的 YYYY-MM-DD
     function formatPureDate(dateText) {
-        // 去掉 "Commits on " 前缀，只留下日期部分进行解析
+        if (!dateText) return null;
+        const pad = (num) => String(num).padStart(2, '0');
+
+        // 1. 中文/带分隔符的年月日格式匹配 (例如 2026年9月1日 / 2026-09-01)
+        const matchYMD = dateText.match(/(\d{4})[年\-\/.]\s*(\d{1,2})[月\-\/.]\s*(\d{1,2})/);
+        if (matchYMD) {
+            return `${matchYMD[1]}-${pad(matchYMD[2])}-${pad(matchYMD[3])}`;
+        }
+
+        // 2. 英文形式 "Commits on Month DD, YYYY" / "Commits on DD Month YYYY"
         const cleanText = dateText.replace(/Commits\s+on\s+/i, '').trim();
         const date = new Date(cleanText);
-        if (isNaN(date.getTime())) return null;
+        if (!isNaN(date.getTime())) {
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        }
 
-        const pad = (num) => String(num).padStart(2, '0');
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        return null;
     }
 
     function cleanGitHubContent() {
@@ -69,17 +79,14 @@
         });
 
         // --- 2. 处理 Commit 分组标题 ---
-        const commitTitles = document.querySelectorAll('h3[data-testid="commit-group-title"]');
+        const commitTitles = document.querySelectorAll('[data-testid="commit-group-title"], .commit-group-title');
         commitTitles.forEach(titleEl => {
-            if (titleEl.getAttribute('data-title-fixed') === 'true') return;
+            const originalText = titleEl.textContent ? titleEl.textContent.trim() : '';
+            if (!originalText || /^\d{4}-\d{2}-\d{2}$/.test(originalText)) return;
 
-            const originalText = titleEl.textContent;
-            if (originalText && originalText.includes('Commits on')) {
-                const cleanDate = formatPureDate(originalText);
-                if (cleanDate) {
-                    titleEl.textContent = cleanDate;
-                    titleEl.setAttribute('data-title-fixed', 'true');
-                }
+            const cleanDate = formatPureDate(originalText);
+            if (cleanDate && cleanDate !== originalText) {
+                titleEl.textContent = cleanDate;
             }
         });
     }
