@@ -35,7 +35,6 @@ GitHub displays timestamps using relative descriptions (such as "2 hours ago" or
    - [Tampermonkey](https://www.tampermonkey.net/) (Recommended)
    - [Violentmonkey](https://violentmonkey.github.io/)
 2. Click the link below to install the script directly:
-   - **[Install from GitHub Raw](https://raw.githubusercontent.com/abevol/github-date-formatter/main/github-date-formatter.user.js)**
    - **[Install from GitHub Release](https://github.com/abevol/github-date-formatter/releases/latest/download/github-date-formatter.user.js)**
    - **[Install from Greasy Fork](https://greasyfork.org/)** *(Add your script link here)*
 
@@ -66,7 +65,6 @@ GitHub 默认使用模糊的相对时间（例如“2 小时前”、“3 天前
    - [Tampermonkey (油猴)](https://www.tampermonkey.net/)（推荐）
    - [Violentmonkey (暴力猴)](https://violentmonkey.github.io/)
 2. 点击下方链接直接安装本脚本：
-   - **[从 GitHub Raw 安装](https://raw.githubusercontent.com/abevol/github-date-formatter/main/github-date-formatter.user.js)**
    - **[从 GitHub Release 安装](https://github.com/abevol/github-date-formatter/releases/latest/download/github-date-formatter.user.js)**
    - **[从 Greasy Fork 安装](https://greasyfork.org/)** *(可在此替换为你的 Greasy Fork 脚本主页)*
 
